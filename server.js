@@ -100,24 +100,24 @@ app.post("/exportHTML", apiLimiter, (request, response) => {
     for (const contact of contacts) {
       // TODO: Make this nicer(?)
       // If they are unsubscribe, skip 'em
-      // if (contact.unsubscribe) {
-      //   continue;
-      // }
+      if (contact.unsubscribe) {
+        continue;
+      }
       console.log(`Making message for ${JSON.stringify(contact)}`);
 
-      // const trackingImageURL = `${config.HOSTING_LOCATION}/${
-      //   contact.contactid
-      // }/${campaignId}/footer.png`;
-      // const unsubscribeURL = `${config.HOSTING_LOCATION}/unsubscribe/${
-      //   contact.contactid
-      // }`;
-      // console.log("trackingImageURL: ", trackingImageURL);
-      // console.log("unsubscribeURL: ", unsubscribeURL);
+      const trackingImageURL = `https://carrierthesis.herokuapp.com/${
+        contact.contactid
+      }/${campaignId}/footer.png`;
+      const unsubscribeURL = `https://carrierthesis.herokuapp.com/unsubscribe/${
+        contact.contactid
+      }`;
+      console.log("trackingImageURL: ", trackingImageURL);
+      console.log("unsubscribeURL: ", unsubscribeURL);
 
       const msg = {
         subject,
         to: contact.email,
-        from: "thealex@umich.edu", // TODO: This should be `request.session.username`,
+        from: "eshum89@gmail.com", // TODO: This should be `request.session.username`,
         // TODO: Add substitution string to HTML email
         content: [
           {
