@@ -5,7 +5,7 @@ const expiration = 86400;
 // Redis defaults to port 6379; if running locally, no config required
 // Docker requires a port
 const client = process.env["prod"]
-  ? redis.createClient(6379, "redis")
+  ? redis.createClient(process.env.REDIS_URL)
   : redis.createClient();
 
 const incrementConnections = (input, callback) => {
