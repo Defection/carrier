@@ -127,8 +127,8 @@ app.post("/exportHTML", apiLimiter, (request, response) => {
         ],
         // Assuming contact.id is userId
         substitutions: {
-          // trackingImageURL,
-          // unsubscribeURL
+          trackingImageURL,
+          unsubscribeURL
         },
         sendAt: parseInt(`${sendAt}`)
       };
