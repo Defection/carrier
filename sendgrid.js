@@ -1,13 +1,13 @@
 const axios = require("axios");
-const config = require("./config.js");
+// const config = require("./config.js");
 
 let sendGrid = (req, res) => {
-  console.log("inside sendgrid function", `${config.TOKEN}`);
+  console.log("inside sendgrid function", `${process.env["TOKEN"]}`);
   return axios({
     method: "post",
     url: "https://api.sendgrid.com/v3/mail/send",
     headers: {
-      Authorization: `Bearer ${config.TOKEN}`,
+      Authorization: `Bearer ${process.env["TOKEN"]}`,
       "Content-Type": "application/json"
     },
     data: {
