@@ -113,12 +113,11 @@ app.post("/exportHTML", apiLimiter, (request, response) => {
       }`;
       console.log("trackingImageURL: ", trackingImageURL);
       console.log("unsubscribeURL: ", unsubscribeURL);
-      console.log("ericericeric", request.session.username);
 
       const msg = {
         subject,
         to: contact.email,
-        from: `${request.session.username}`, // TODO: This should be `request.session.username`,
+        from: `"eshum89@gmail.com"`, // TODO: This should be `request.session.username`,
         // TODO: Add substitution string to HTML email
         content: [
           {
