@@ -6,7 +6,7 @@ const auth = require("./auth");
 const AWS = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
-const config = require("./config.js");
+// const config = require("./config.js");
 const sgMail = require("@sendgrid/mail");
 var minify = require("html-minifier").minify;
 const axios = require("axios");
@@ -48,7 +48,7 @@ const apiLimiter = function(request, response, next) {
 
 app.post("/contactUs", (req, res) => {
   console.log(req.body);
-  sgMail.setApiKey(`${config.TOKEN}`);
+  sgMail.setApiKey(`${process.env["TOKEN"]}`);
   const msg = {
     to: "eshum89@gmail.com",
     from: req.body.email,
@@ -77,7 +77,7 @@ app.post("/exportHTML", apiLimiter, (request, response) => {
 
   db.getCampaignSubject(campaignId, (error, results) => {
     const subject = results.rows[0].subject;
-    sgMail.setApiKey(`${config.TOKEN}`);
+    sgMail.setApiKey(`${process.env["TOKEN"]}`);
     sgMail.setSubstitutionWrappers("{{", "}}");
     const emails = [];
 
@@ -371,8 +371,8 @@ app.post("/templates", (request, response) => {
 const uploadToS3 = (userId, campaignId, file, callback) => {
   const fileName = `${userId}-${campaignId}-draft.json`;
   let s3bucket = new AWS.S3({
-    accessKeyId: config.accessKeyId,
-    secretAccessKey: config.secretAccessKey,
+    accessKeyId: process.env["accessKeyId"],
+    secretAccessKey: process.env["secretAccessKey"],
     Bucket: BUCKET_NAME
   });
 

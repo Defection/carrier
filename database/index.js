@@ -1,16 +1,16 @@
 var format = require("pg-format");
 const { Pool } = require("pg");
-const config = require("../config.js");
+// const config = require("../config.js");
 
-const pool = config.prod
+const pool = process.env["prod"]
   ? // If true, use production.
     new Pool({
-      host: config.host,
+      host: process.env["host"],
       //   // connectionString: process.env.DATABASE_URL,
-      port: config.port,
-      user: config.user,
-      password: config.password,
-      database: config.database
+      port: process.env["port"],
+      user: process.env["user"],
+      password: process.env["password"],
+      database: process.env["database"]
     })
   : // Else, use localhost
     new Pool({ host: "localhost", user: "", password: "", database: "mail" });
